@@ -7,7 +7,9 @@ describe "Admin Invoices Index Page" do
     @c1 = Customer.create!(first_name: "Yo", last_name: "Yoz", address: "123 Heyyo", city: "Whoville", state: "CO", zip: 12345)
     @c2 = Customer.create!(first_name: "Hey", last_name: "Heyz")
 
-    @i1 = Invoice.create!(customer_id: @c1.id, status: 2, created_at: "2012-03-25 09:54:09")
+    @cou1 = create(:coupon, merchant: @m1)
+
+    @i1 = Invoice.create!(customer_id: @c1.id, status: 2, coupon_id: @cou1.id, created_at: "2012-03-25 09:54:09")
     @i2 = Invoice.create!(customer_id: @c2.id, status: 1, created_at: "2012-03-25 09:30:09")
 
     @item_1 = Item.create!(name: "test", description: "lalala", unit_price: 6, merchant_id: @m1.id)
@@ -67,6 +69,12 @@ describe "Admin Invoices Index Page" do
 
       expect(current_path).to eq(admin_invoice_path(@i1))
       expect(@i1.status).to eq("completed")
+    end
+  end
+
+  describe 'Admin Invoices Coupon' do 
+    it 'displays name and code of coupon that was used' do 
+      expect(page).to have_content("Coupon Used: #{@cou1.name}, #{@cou1.unique_code}")
     end
   end
 end
