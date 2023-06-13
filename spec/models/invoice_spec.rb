@@ -6,6 +6,7 @@ RSpec.describe Invoice, type: :model do
 
     @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
     @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
+    @item_4 = Item.create!(name: "Hair tie", description: "This holds up your hair", unit_price: 1, merchant_id: @merchant1.id)
     @item_8 = Item.create!(name: "Butterfly Clip", description: "This holds up your hair but in a clip", unit_price: 5, merchant_id: @merchant1.id)
 
     @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
@@ -18,12 +19,14 @@ RSpec.describe Invoice, type: :model do
     @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 2, coupon_id: @coupon_2.id, created_at: "2012-03-28 14:54:09")
     @invoice_3 = Invoice.create!(customer_id: @customer_1.id, status: 2, coupon_id: @coupon_1.id, created_at: "2012-03-28 14:54:09")
     @invoice_4 = Invoice.create!(customer_id: @customer_1.id, status: 2, coupon_id: @coupon_3.id)
-    
+    @invoice_5 = Invoice.create!(customer_id: @customer_1.id, status: 2)
+
     @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 2)
     @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
     @ii_2 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 2)
     @ii_3 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 2)
     @ii_4 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_2.id, quantity: 2, unit_price: 8, status: 2)
+    @ii_6 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_4.id, quantity: 1, unit_price: 1, status: 1)
   end
 
   describe "validations" do
@@ -47,13 +50,18 @@ RSpec.describe Invoice, type: :model do
     it '#grand_total(dollars off)' do 
       expect(@invoice_3.grand_total).to eq(40.00)
     end
+
     
     it '#grand_total(percentage off)' do 
       expect(@invoice_2.grand_total).to eq(9.5)
     end
-
+    
     it '#grand_total(too much off)' do 
       expect(@invoice_4.grand_total).to eq(0.0)
+    end
+
+    it '#grand_total(no coupon)' do 
+      expect(@invoice_5.grand_total).to eq(1)
     end
   end
 end
