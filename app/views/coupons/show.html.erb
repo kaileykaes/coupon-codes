@@ -4,3 +4,4 @@
 <p>Discount: <%= @coupon.discount %></p>
 <p>Status: <%= @coupon.status %></p>
 <p>Times Used: <%= @coupon.times_used %></p>
+<p><%= button_to 'Deactivate Coupon', "/merchants/#{@merchant.id}/coupons/#{@coupon.id}", method: :patch %></p>

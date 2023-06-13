@@ -12,7 +12,7 @@ require 'rails_helper'
 RSpec.describe 'Show PAge' do
   before(:each) do 
     @dolly = create(:merchant)
-    @coupon_1 = create(:coupon, merchant: @dolly)
+    @coupon_1 = create(:coupon, merchant: @dolly, status: 1)
     @coupon_2 = create(:coupon, merchant: @dolly)
 
     #times used set up
@@ -45,5 +45,21 @@ RSpec.describe 'Show PAge' do
       visit merchant_coupon_path(@merchant, @coupon)
       expect(page).to have_content("Times Used: 2")
     end 
+  end
+
+  describe 'Merchant Coupon Deactivate' do 
+    it 'has a button to deactivate coupon' do 
+      visit merchant_coupon_path(@dolly, @coupon_1) 
+      expect(page).to have_button('Deactivate')
+    end
+
+    it 'deactivate button updates status, redirect to show page, status is updated' do 
+      visit merchant_coupon_path(@dolly, @coupon_1) 
+      expect(@coupon_1.status).to eq('Active')
+      expect(page).to have_content("Status: Active")
+      click_button('Deactivate')
+      expect(current_path).to eq("/merchants/#{@dolly.id}/coupons/#{@coupon_1.id}")
+      expect(page).to have_content("Status: Inactive")
+    end
   end
 end
