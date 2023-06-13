@@ -5,6 +5,8 @@ RSpec.describe Coupon, type: :model do
     @merchant = create(:merchant)
     @customer = create(:customer)
     @coupon = create(:coupon, merchant: @merchant)
+    @percentage_coupon = create(:coupon, merchant: @merchant, status: 1, discount: 50, discount_type: 0) 
+    @dollars_coupon = create(:coupon, merchant: @merchant, status: 1, discount: 50, discount_type: 1) 
     @invoice = create(:invoice, coupon: @coupon, customer: @customer)
     @invoice_2 = create(:invoice, coupon: @coupon, customer: @customer)
     @invoice_3 = create(:invoice, coupon: @coupon, customer: @customer)
@@ -29,6 +31,11 @@ RSpec.describe Coupon, type: :model do
   describe 'instance methods' do 
     it '#times_used' do 
       expect(@coupon.times_used).to eq(2)
+    end
+
+    it 'usable_discount' do 
+      expect(@percentage_coupon.usable_discount).to eq(0.5)
+      expect(@dollars_coupon.usable_discount).to eq(50)
     end
   end
 end

@@ -8,4 +8,12 @@ class Coupon < ApplicationRecord
   def times_used
     invoices.joins(:transactions).where("result = 1").count
   end
+
+  def usable_discount
+    if discount_type == 'Percentage'
+      (discount/100)
+    elsif discount_type == 'Dollar Amount'
+      discount
+    end
+  end
 end
