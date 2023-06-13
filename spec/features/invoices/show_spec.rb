@@ -125,21 +125,15 @@ RSpec.describe "invoices show" do
       expect(page).to have_link("#{@coupon_2.name}, #{@coupon_2.unique_code}", href: merchant_coupon_path(@merchant1, @coupon_2))
     end
     
-    # it 'displays subtotal and grand total revenues for invoice(discount greater than total)' do 
-    #   visit merchant_invoice_path(@merchant1, @invoice_3)
+    it 'displays subtotal and grand total revenues for invoice(discount greater than total)' do 
+      visit merchant_invoice_path(@merchant1, @invoice_3)
       
-    #   within("#invoice-totals") do 
-    #     expect(page).to have_content("Subtotal: #{@invoice_3.total_revenue}")
-    #     expect(page).to have_content("Grand Total: #{@invoice_3.grand_total}")
-    #   end
-    #   expect(@invoice_3.grand_total).to eq(0.0)
-    #   expect(page).to have_link("#{@coupon_3.name}, #{@coupon_3.unique_code}", href: merchant_coupon_path(@merchant1, @coupon_3))
-    # end
+      within("#invoice-totals") do 
+        expect(page).to have_content("Subtotal: #{@invoice_3.total_revenue}")
+        expect(page).to have_content("Grand Total: #{@invoice_3.grand_total}")
+      end
+      expect(@invoice_3.grand_total).to eq(0.0)
+      expect(page).to have_link("#{@coupon_3.name}, #{@coupon_3.unique_code}", href: merchant_coupon_path(@merchant1, @coupon_3))
+    end
   end
 end
-
-# As a merchant
-# When I visit one of my merchant invoice show pages
-# I see the subtotal for my merchant from this invoice (that is, the total that does not include coupon discounts)
-# And I see the grand total revenue after the discount was applied
-# And I see the name and code of the coupon used as a link to that coupon's show page.
