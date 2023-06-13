@@ -9,12 +9,26 @@
 <div class="mr-auto col-sm-6">
   <ul>
   <section id="coupons">
-    <% @merchant.coupons.each do |coupon| %>
-      <div id="coupon-<%= coupon.id %>">
-        <li><%= link_to coupon.name, merchant_coupon_path(@merchant, coupon) %> <%= coupon.discount %>
-      </div>
-    <% end %>
-    </section>
+
+    <div id="active">
+      <h4>Active Coupons</h4>
+      <% @merchant.active_coupons.each do |coupon| %>
+        <div id="coupon-<%= coupon.id %>">
+          <li><%= link_to coupon.name, merchant_coupon_path(@merchant, coupon) %> <%= coupon.discount %>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="inactive">
+      <h4>Inactive Coupons</h4>
+      <% @merchant.inactive_coupons.each do |coupon| %>
+        <div id="coupon-<%= coupon.id %>">
+          <li><%= link_to coupon.name, merchant_coupon_path(@merchant, coupon) %> <%= coupon.discount %>
+        </div>
+      <% end %>
+    </div>
+    
+  </section>
   </ul>
 </div>
 
