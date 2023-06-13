@@ -76,5 +76,10 @@ describe "Admin Invoices Index Page" do
     it 'displays name and code of coupon that was used' do 
       expect(page).to have_content("Coupon Used: #{@cou1.name}, #{@cou1.unique_code}")
     end
+
+    it 'does not display  coupon or break if no coupon used' do 
+      visit admin_invoice_path(@i2)
+      expect(page).to_not have_content("Coupon Used:")
+    end
   end
 end
