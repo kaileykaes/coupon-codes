@@ -11,9 +11,9 @@ class Coupon < ApplicationRecord
 
   def usable_discount
     if discount_type == 'Percentage'
-      (discount/100)
+      (discount.to_f/100)
     elsif discount_type == 'Dollar Amount'
-      discount
+      discount.to_f
     end
   end
 end

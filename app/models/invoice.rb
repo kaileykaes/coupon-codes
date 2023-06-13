@@ -16,5 +16,11 @@ class Invoice < ApplicationRecord
   end
 
   def grand_total
+    if coupon.discount_type == 'Percentage Off'
+      total_revenue - (total_revenue * coupon.usable_discount)
+    else
+    # elsif coupon.discount_type == 'Dollar Amount'
+      total_revenue - coupon.usable_discount
+    end
   end
 end
