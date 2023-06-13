@@ -81,5 +81,16 @@ describe "Admin Invoices Index Page" do
       visit admin_invoice_path(@i2)
       expect(page).to_not have_content("Coupon Used:")
     end
+
+    it 'shows subtotal and grand total if coupon used' do 
+      expect(page).to have_content("Subtotal: $#{@i1.total_revenue}")
+      expect(page).to have_content("Grand Total: $#{@i1.grand_total}")
+    end
+
+    it 'shows subtotal and grand total if coupon not used' do 
+      visit admin_invoice_path(@i2)
+      expect(page).to have_content("Subtotal: $#{@i2.total_revenue}")
+      expect(page).to have_content("Grand Total: $#{@i2.grand_total}")
+    end
   end
 end
