@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     resources :invoices, except: [:new, :destroy]
   end
 
-  get "/", to: "/admin/dashboard"
+  get "/", to: "admin/dashboard#index"
 end
