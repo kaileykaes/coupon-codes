@@ -1,4 +1,10 @@
 <%= render partial: "shared/nav" %>
+ 
+<section id="holidays">
+  <strong>Upcoming Holidays: </strong><%= @holidays.each do |holiday| %>
+    <p><%= holiday.name %>, <%= holiday.date %></p>
+  <% end %>
+  </section>
 
 <div class="row">
   <div class="col-sm-6 column-header">

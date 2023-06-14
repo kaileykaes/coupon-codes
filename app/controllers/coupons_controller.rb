@@ -2,7 +2,9 @@ class CouponsController < ApplicationController
   before_action :find_merchant_and_coupon, only: [:show]
   before_action :find_merchant, only: [:index, :create, :new]
 
-  def index; end
+  def index
+    @holidays = HolidayDataService.new.instantiate_holidays[0..2]
+  end
 
   def show; end
 

@@ -1,9 +1,9 @@
 <%= render partial: "shared/nav" %>
 <h1><%= @coupon.name %></h1>
-<p>Unique Code: <%= @coupon.unique_code %></p>
-<p>Discount: <%= @coupon.discount %></p>
-<p>Status: <%= @coupon.status %></p>
-<p>Times Used: <%= @coupon.times_used %></p>
+<strong>Unique Code: </strong><%= @coupon.unique_code %>
+<strong>Discount: </strong><%= @coupon.discount %>
+<strong>Status: </strong><%= @coupon.status %>
+<strong>Times Used: </strong><%= @coupon.times_used %>
 <% if @coupon.status == 'Active' %>
   <p><%= form_with url: "/merchants/#{@merchant.id}/coupons/#{@coupon.id}", method: :patch, local: true do |f| %> 
     <%= f.hidden_field :status, value: 'Inactive' %>
@@ -16,6 +16,3 @@
     <%= f.submit 'Activate Coupon' %>
   <% end %></p>
 <% end %>
-
-<p><%#= button_to 'Deactivate Coupon', "/merchants/#{@merchant.id}/coupons/#{@coupon.id}", method: :patch %></p>
-<p><%#= button_to 'Activate Coupon', "/merchants/#{@merchant.id}/coupons/#{@coupon.id}", method: :patch %></p>

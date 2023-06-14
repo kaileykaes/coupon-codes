@@ -61,4 +61,17 @@ RSpec.describe 'Coupons Index', type: :feature do
       end
     end
   end
+
+  describe 'Upcoming Holidays' do 
+    it 'displays next 3 upcoming holidays' do 
+      within("#holidays") do 
+        expect(page).to have_content('Juneteenth, 2023-06-19')
+        expect(page).to have_content('Independence Day, 2023-07-04')
+        expect(page).to have_content('Labour Day, 2023-09-04')
+      end
+    end
+  end
 end
+# I see a section with a header of "Upcoming Holidays"
+# In this section the name and date of the next 3 upcoming US holidays are listed.
+
