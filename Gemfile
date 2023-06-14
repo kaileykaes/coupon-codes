@@ -63,6 +63,7 @@ group :development, :test do
   gem "simplecov"
   gem "faraday"
   gem "json"
+  gem 'hirb'
 end
 
 group :development do
