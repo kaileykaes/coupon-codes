@@ -14,6 +14,7 @@ RSpec.describe Coupon, type: :model do
     @transaction_2 = create(:transaction, invoice: @invoice_2, result: 1)
     @transaction_3 = create(:transaction, invoice: @invoice_3, result: 0)
   end
+  
   describe 'relationships' do 
     it {should belong_to :merchant}
     it {should have_many :invoices}

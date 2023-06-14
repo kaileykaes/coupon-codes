@@ -19,7 +19,6 @@ class CouponsController < ApplicationController
       if coupon.save
         redirect_to merchant_coupons_path(@merchant)
       else 
-      # elsif !missing_params
         redirect_to new_merchant_coupon_path(@merchant)
         flash[:alert] = 'Unique code already in use. Please choose a different unique code.'
       end
@@ -50,9 +49,4 @@ class CouponsController < ApplicationController
     @coupon = Coupon.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
   end
-
-  # def missing_params
-  #   keys = coupons_params.except(:id).select { |_, v| v.blank? }.keys
-  #   keys.map { |param| "#{param.capitalize} can't be blank." }
-  # end
 end

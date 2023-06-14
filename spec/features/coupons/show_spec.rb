@@ -1,15 +1,6 @@
-# As a merchant
-# When I visit a merchant's coupon show page
-# I see that coupon's name and code
-# And I see the percent/dollar off value
-# As well as its status (active or inactive)
-# And I see a count of how many times that coupon has been used.
-
-# (Note: "use" of a coupon should be limited to successful transactions.)
-
 require 'rails_helper'
 
-RSpec.describe 'Show PAge' do
+RSpec.describe 'Show Page' do
   before(:each) do 
     @dolly = create(:merchant)
     @coupon_1 = create(:coupon, merchant: @dolly, status: 1)
