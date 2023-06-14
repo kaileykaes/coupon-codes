@@ -12,7 +12,7 @@ RSpec.describe 'Coupons Index', type: :feature do
   end
 
   describe 'merchant coupons' do 
-   xit 'lists coupon names and amount off' do 
+    it 'lists coupon names and amount off' do 
       within("#coupons") do 
         expect(page).to have_content(@coupon_1.name)
         expect(page).to have_content(@coupon_1.discount)
@@ -21,7 +21,7 @@ RSpec.describe 'Coupons Index', type: :feature do
       end
     end
     
-   xit 'coupon names are links to coupon show pages' do 
+    it 'coupon names are links to coupon show pages' do 
       within("#coupon-#{@coupon_1.id}") do 
         expect(page).to have_link("#{@coupon_1.name}", href: merchant_coupon_path(@dolly, @coupon_1))
         click_link("#{@coupon_1.name}")
@@ -35,7 +35,7 @@ RSpec.describe 'Coupons Index', type: :feature do
       # end
     end
 
-   xit 'has link to coupon create page' do 
+    it 'has link to coupon create page' do 
       expect(page).to have_link('Create a New Coupon', href: new_merchant_coupon_path(@dolly))
       click_link('Create a New Coupon')
       expect(current_path).to eq(new_merchant_coupon_path(@dolly))
@@ -43,7 +43,7 @@ RSpec.describe 'Coupons Index', type: :feature do
   end
 
   describe 'merchant coupons sort' do 
-   xit 'merchant coupons are sorted by activeness' do 
+    it 'merchant coupons are sorted by activeness' do 
 
       within("#active") do 
         expect(page).to have_content("Active Coupons")
@@ -63,7 +63,7 @@ RSpec.describe 'Coupons Index', type: :feature do
   end
 
   describe 'Upcoming Holidays' do 
-   xit 'displays next 3 upcoming holidays' do 
+    it 'displays next 3 upcoming holidays' do 
       within("#holidays") do 
         expect(page).to have_content('Juneteenth, 2023-06-19')
         expect(page).to have_content('Independence Day, 2023-07-04')

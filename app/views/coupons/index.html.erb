@@ -2,6 +2,7 @@
  
 <section id="holidays">
   <strong>Upcoming Holidays: </strong><%= @holidays.each do |holiday| %>
+    <p><%= holiday.name %>, <%= holiday.date %></p>
   <% end %>
   </section>
 
