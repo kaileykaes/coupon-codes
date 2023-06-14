@@ -19,10 +19,10 @@ RSpec.describe HolidayDataService, type: :model do
     end
   end
 
-  describe '#instantiate_data' do 
-    it 'can create holiday objects with that data' do 
-      expect(@hds.instantiate_data).to be_a(Array)
-      expect(@hds.instantiate_data[0]).to be_a(Holiday)
+  describe '#instantiate_holidays' do 
+    it 'can create holiday objects with that holidays' do 
+      expect(@hds.instantiate_holidays).to be_a(Array)
+      expect(@hds.instantiate_holidays[0]).to be_a(Holiday)
     end
   end
 end

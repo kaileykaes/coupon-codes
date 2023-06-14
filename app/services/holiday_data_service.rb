@@ -7,7 +7,7 @@ class HolidayDataService
     JSON.parse(response.body, symbolize_names: true)
   end
 
-  def instantiate_data
+  def instantiate_holidays
     data = load_data('https://date.nager.at/api/v3/NextPublicHolidays/US')
     holidays = data.map do |datum|
       Holiday.new(datum)
